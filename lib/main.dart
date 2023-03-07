@@ -32,9 +32,9 @@ class _LaeetState extends State<Laeet> {
   int itemDate = 0;
   String itemClass = "لوحه مركبه موتوسيكل ";
   String itemStatus = "مفقود ";
-  bool isItemStatus = false;
-  Color textColor = Colors.greenAccent;
-  Color textColor2 = Colors.orangeAccent;
+  bool isItemFound = false;
+  Color foundColor = Colors.greenAccent;
+  Color notFoundColor = Colors.orangeAccent;
 
   int itemReward = 0;
 
@@ -53,7 +53,6 @@ class _LaeetState extends State<Laeet> {
               padding: const EdgeInsets.all(10),
               child: ElevatedButton(
                 onPressed: () {
-                  isSelected = !isSelected;
                   isSelected = true;
                   setState(() {});
                 },
@@ -64,9 +63,9 @@ class _LaeetState extends State<Laeet> {
                       borderRadius: BorderRadius.all(Radius.circular(8))),
                   minimumSize: Size(50, 50),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: const Text(
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
                     "اتصل بنا",
                     style: TextStyle(
                         fontSize: 20,
@@ -83,11 +82,11 @@ class _LaeetState extends State<Laeet> {
                 style: TextStyle(color: Colors.black, fontSize: 23),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Image(image: AssetImage("")),
-            SizedBox(
+            const Image(image: AssetImage("")),
+            const SizedBox(
               height: 20,
             ),
             Container(
@@ -104,17 +103,17 @@ class _LaeetState extends State<Laeet> {
                     ),
                   ),
                   Text(
-                    "$name",
-                    style: TextStyle(fontSize: 15),
+                    name,
+                    style: const TextStyle(fontSize: 15),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 25,
                   ),
                   Text(
-                    "$itemTitleMain",
+                    itemTitleMain,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(
@@ -141,7 +140,7 @@ class _LaeetState extends State<Laeet> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 18,
                   ),
                   RichText(
@@ -161,7 +160,7 @@ class _LaeetState extends State<Laeet> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 18,
                   ),
                   RichText(
@@ -186,7 +185,7 @@ class _LaeetState extends State<Laeet> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 18,
                   ),
                   RichText(
@@ -200,13 +199,13 @@ class _LaeetState extends State<Laeet> {
                         TextSpan(
                             text: '  $itemStatus',
                             style: TextStyle(
-                              color: isItemStatus ? textColor : textColor2,
+                              color: isItemFound ? foundColor : notFoundColor,
                               fontSize: 18,
                             )),
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 18,
                   ),
                   RichText(
