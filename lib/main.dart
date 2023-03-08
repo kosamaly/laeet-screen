@@ -24,6 +24,7 @@ class Laeet extends StatefulWidget {
 
 class _LaeetState extends State<Laeet> {
   bool isSelected = false;
+
   int mobileNum = 0;
   String name = "Eslam";
   String itemTitleMain = "شنطه مفقوده المعلم";
@@ -32,11 +33,12 @@ class _LaeetState extends State<Laeet> {
   int itemDate = 0;
   String itemClass = "لوحه مركبه موتوسيكل ";
   String itemStatus = "مفقود ";
+  String itemStatus2 = "تم الايجاد";
   bool isItemFound = false;
   Color foundColor = Colors.greenAccent;
   Color notFoundColor = Colors.orangeAccent;
-
   int itemReward = 0;
+  bool afterFounded = true;
 
   @override
   Widget build(BuildContext context) {
@@ -44,13 +46,51 @@ class _LaeetState extends State<Laeet> {
       appBar: AppBar(
         backgroundColor: Colors.white60,
       ),
-      backgroundColor: Color.fromRGBO(246, 246, 246, 20),
+      backgroundColor: const Color.fromRGBO(246, 246, 246, 20),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.only(top: 24),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  /// تم الايجاد
+                  Visibility(
+                    visible: afterFounded,
+                    child: TextButton.icon(
+                      onPressed: () {
+                        isItemFound = true;
+                        foundColor;
+                        itemStatus2;
+                        afterFounded = false;
+                        setState(() {});
+                      },
+                      icon: const Icon(
+                        Icons.check_box,
+                        size: 24.0,
+                      ),
+                      label: const Text('تم الايجاد '),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  TextButton.icon(
+                    // <-- TextButton
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.check_box,
+                      size: 24.0,
+                    ),
+                    label: const Text('تعديل'),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
               child: ElevatedButton(
                 onPressed: () {
                   isSelected = true;
@@ -61,7 +101,7 @@ class _LaeetState extends State<Laeet> {
                   backgroundColor: Colors.green,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8))),
-                  minimumSize: Size(50, 50),
+                  minimumSize: const Size(50, 50),
                 ),
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
@@ -75,6 +115,9 @@ class _LaeetState extends State<Laeet> {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 1,
+            ),
             Visibility(
               visible: isSelected,
               child: Text(
@@ -83,11 +126,7 @@ class _LaeetState extends State<Laeet> {
               ),
             ),
             const SizedBox(
-              height: 20,
-            ),
-            const Image(image: AssetImage("")),
-            const SizedBox(
-              height: 20,
+              height: 16,
             ),
             Container(
               width: MediaQuery.of(context).size.height * 0.4,
@@ -95,8 +134,8 @@ class _LaeetState extends State<Laeet> {
               child: Card(
                 color: Colors.white,
                 child: Column(children: [
-                  Padding(
-                    padding: const EdgeInsets.all(15),
+                  const Padding(
+                    padding: EdgeInsets.all(15),
                     child: Icon(
                       Icons.person,
                       size: 35,
@@ -107,7 +146,11 @@ class _LaeetState extends State<Laeet> {
                     style: const TextStyle(fontSize: 15),
                   ),
                   const SizedBox(
-                    height: 25,
+                    height: 24,
+                  ),
+                  const Image(image: AssetImage("")),
+                  const SizedBox(
+                    height: 24,
                   ),
                   Text(
                     itemTitleMain,
@@ -120,20 +163,20 @@ class _LaeetState extends State<Laeet> {
                     "$itemTitleSub",
                     style: TextStyle(fontSize: 20, color: Colors.black54),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 18,
                   ),
                   RichText(
                     text: TextSpan(
                       text: "مكان الفقد:",
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.black,
                           fontSize: 22,
                           fontWeight: FontWeight.bold),
                       children: <TextSpan>[
                         TextSpan(
                             text: '  $itemPlace',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.black45,
                               fontSize: 18,
                             )),
@@ -146,14 +189,14 @@ class _LaeetState extends State<Laeet> {
                   RichText(
                     text: TextSpan(
                       text: "تاريخ الفقد:",
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.black,
                           fontSize: 22,
                           fontWeight: FontWeight.bold),
                       children: <TextSpan>[
                         TextSpan(
                             text: '  $itemDate',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.black45,
                               fontSize: 18,
                             )),
@@ -166,7 +209,7 @@ class _LaeetState extends State<Laeet> {
                   RichText(
                     text: TextSpan(
                       text: "  الفئة :   ",
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.black,
                           fontSize: 22,
                           fontWeight: FontWeight.bold),
@@ -190,14 +233,14 @@ class _LaeetState extends State<Laeet> {
                   ),
                   RichText(
                     text: TextSpan(
-                      text: "الحاله :",
-                      style: TextStyle(
+                      text: " الحاله : ",
+                      style: const TextStyle(
                           color: Colors.black,
                           fontSize: 22,
                           fontWeight: FontWeight.bold),
                       children: <TextSpan>[
                         TextSpan(
-                            text: '  $itemStatus',
+                            text: isItemFound ? itemStatus2 : itemStatus,
                             style: TextStyle(
                               color: isItemFound ? foundColor : notFoundColor,
                               fontSize: 18,
@@ -211,14 +254,14 @@ class _LaeetState extends State<Laeet> {
                   RichText(
                     text: TextSpan(
                       text: " المكافآه :",
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.black,
                           fontSize: 22,
                           fontWeight: FontWeight.bold),
                       children: <TextSpan>[
                         TextSpan(
                             text: '  $itemReward ، جنيه ',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.black45,
                               fontSize: 18,
                             )),
