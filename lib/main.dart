@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laaeet/constants.dart';
 
 void main() {
   runApp(const MyApp());
@@ -75,7 +76,7 @@ class _LaeetState extends State<Laeet> {
                     ),
                   ),
                   const SizedBox(
-                    width: 5,
+                    width: tinySpace,
                   ),
                   TextButton.icon(
                     // <-- TextButton
@@ -116,7 +117,7 @@ class _LaeetState extends State<Laeet> {
               ),
             ),
             const SizedBox(
-              height: 1,
+              height: tinySpace,
             ),
             Visibility(
               visible: isSelected,
@@ -126,7 +127,7 @@ class _LaeetState extends State<Laeet> {
               ),
             ),
             const SizedBox(
-              height: 16,
+              height: largeSpace,
             ),
             Container(
               width: MediaQuery.of(context).size.height * 0.4,
@@ -146,25 +147,25 @@ class _LaeetState extends State<Laeet> {
                     style: const TextStyle(fontSize: 15),
                   ),
                   const SizedBox(
-                    height: 24,
+                    height: extraSpace,
                   ),
                   const Image(image: AssetImage("")),
                   const SizedBox(
-                    height: 24,
+                    height: extraSpace,
                   ),
                   Text(
                     itemTitleMain,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: smallSpace,
                   ),
                   Text(
                     "$itemTitleSub",
                     style: TextStyle(fontSize: 20, color: Colors.black54),
                   ),
                   const SizedBox(
-                    height: 18,
+                    height: largeSpace,
                   ),
                   RichText(
                     text: TextSpan(
@@ -184,7 +185,7 @@ class _LaeetState extends State<Laeet> {
                     ),
                   ),
                   const SizedBox(
-                    height: 18,
+                    height: largeSpace,
                   ),
                   RichText(
                     text: TextSpan(
@@ -204,7 +205,7 @@ class _LaeetState extends State<Laeet> {
                     ),
                   ),
                   const SizedBox(
-                    height: 18,
+                    height: extraSpace,
                   ),
                   RichText(
                     text: TextSpan(
@@ -229,7 +230,7 @@ class _LaeetState extends State<Laeet> {
                     ),
                   ),
                   const SizedBox(
-                    height: 18,
+                    height: largeSpace,
                   ),
                   RichText(
                     text: TextSpan(
@@ -249,7 +250,7 @@ class _LaeetState extends State<Laeet> {
                     ),
                   ),
                   const SizedBox(
-                    height: 18,
+                    height: largeSpace,
                   ),
                   RichText(
                     text: TextSpan(
