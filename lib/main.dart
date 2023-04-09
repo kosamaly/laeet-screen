@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:laaeet/constants.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:laaeet/pages/goldPrices.dart';
+import 'package:laaeet/pages/result.dart';
+
+import 'dimensions.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,8 +14,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Laeet(),
+    return MaterialApp(
+      initialRoute: "/",
+      routes: {
+        "/result": (context) => Result(),
+        "/goldPrices": (context) => GoldPrice(),
+      },
+      home: const Laeet(),
     );
   }
 }
@@ -26,257 +35,224 @@ class Laeet extends StatefulWidget {
 class _LaeetState extends State<Laeet> {
   bool isSelected = false;
 
-  int mobileNum = 0;
-  String name = "Eslam";
-  String itemTitleMain = "شنطه مفقوده المعلم";
-  String itemTitleSub = "شنطه مفقوده المعلم";
-  String itemPlace = "الفلكي الاسكندريه";
-  int itemDate = 0;
-  String itemClass = "لوحه مركبه موتوسيكل ";
-  String itemStatus = "مفقود ";
-  String itemStatus2 = "تم الايجاد";
-  bool isItemFound = false;
-  Color foundColor = Colors.greenAccent;
-  Color notFoundColor = Colors.orangeAccent;
-  int itemReward = 0;
-  bool afterFounded = true;
+  Color iconColor = Colors.white70;
+  Color iconColor2 = Colors.white70;
+  double height = 1;
+  bool isMaleSelected = false;
+  bool isFemaleSelected = false;
 
+  double exchangeRate = 0;
+
+  // TabBar get _tabBar => const TabBar(
+  //       labelColor: Colors.black, //<-- selected text color
+  //       unselectedLabelColor: Colors.white,
+  //       indicatorColor: Colors.black, //<-- Unselected text color
+  //       tabs: [
+  //         Tab(text: 'الموجودات', icon: Icon(FontAwesomeIcons.check)),
+  //         Tab(text: 'البحث', icon: Icon(Icons.search)),
+  //         Tab(text: 'الرئيسية', icon: Icon(Icons.home)),
+  //       ],
+  //     );
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white60,
-      ),
-      backgroundColor: const Color.fromRGBO(246, 246, 246, 20),
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 24),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  /// تم الايجاد
-                  Visibility(
-                    visible: afterFounded,
-                    child: TextButton.icon(
-                      onPressed: () {
-                        isItemFound = true;
-                        foundColor;
-                        itemStatus2;
-                        afterFounded = false;
-                        setState(() {});
-                      },
-                      icon: const Icon(
-                        Icons.check_box,
-                        size: 24.0,
-                      ),
-                      label: const Text('تم الايجاد '),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: tinySpace,
-                  ),
-                  TextButton.icon(
-                    // <-- TextButton
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.check_box,
-                      size: 24.0,
-                    ),
-                    label: const Text('تعديل'),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: ElevatedButton(
+    return DefaultTabController(
+      length: 5,
+      child: Scaffold(
+        appBar: AppBar(
+          titleSpacing: 0.0,
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: const Icon(Icons.home_repair_service),
                 onPressed: () {
-                  isSelected = true;
-                  setState(() {});
+                  Scaffold.of(context).openDrawer();
                 },
-                style: ElevatedButton.styleFrom(
-                  elevation: 5,
-                  backgroundColor: Colors.green,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(8))),
-                  minimumSize: const Size(50, 50),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    "اتصل بنا",
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: tinySpace,
-            ),
-            Visibility(
-              visible: isSelected,
-              child: Text(
-                "$mobileNum",
-                style: TextStyle(color: Colors.black, fontSize: 23),
-              ),
-            ),
-            const SizedBox(
-              height: largeSpace,
-            ),
-            Container(
-              width: MediaQuery.of(context).size.height * 0.4,
-              height: MediaQuery.of(context).size.width * 1.2,
-              child: Card(
+                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+              );
+            },
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(
+                Icons.menu,
                 color: Colors.white,
-                child: Column(children: [
-                  const Padding(
-                    padding: EdgeInsets.all(15),
-                    child: Icon(
-                      Icons.person,
-                      size: 35,
-                    ),
-                  ),
-                  Text(
-                    name,
-                    style: const TextStyle(fontSize: 15),
-                  ),
-                  const SizedBox(
-                    height: extraSpace,
-                  ),
-                  const Image(image: AssetImage("")),
-                  const SizedBox(
-                    height: extraSpace,
-                  ),
-                  Text(
-                    itemTitleMain,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-                  ),
-                  const SizedBox(
-                    height: smallSpace,
-                  ),
-                  Text(
-                    "$itemTitleSub",
-                    style: TextStyle(fontSize: 20, color: Colors.black54),
-                  ),
-                  const SizedBox(
-                    height: largeSpace,
-                  ),
-                  RichText(
-                    text: TextSpan(
-                      text: "مكان الفقد:",
-                      style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold),
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: '  $itemPlace',
-                            style: const TextStyle(
-                              color: Colors.black45,
-                              fontSize: 18,
-                            )),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: largeSpace,
-                  ),
-                  RichText(
-                    text: TextSpan(
-                      text: "تاريخ الفقد:",
-                      style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold),
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: '  $itemDate',
-                            style: const TextStyle(
-                              color: Colors.black45,
-                              fontSize: 18,
-                            )),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: extraSpace,
-                  ),
-                  RichText(
-                    text: TextSpan(
-                      text: "  الفئة :   ",
-                      style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: '  $itemClass',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18,
-                              background: Paint()
-                                ..strokeWidth = 24.0
-                                ..color = Colors.grey
-                                ..style = PaintingStyle.stroke
-                                ..strokeJoin = StrokeJoin.round),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: largeSpace,
-                  ),
-                  RichText(
-                    text: TextSpan(
-                      text: " الحاله : ",
-                      style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold),
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: isItemFound ? itemStatus2 : itemStatus,
-                            style: TextStyle(
-                              color: isItemFound ? foundColor : notFoundColor,
-                              fontSize: 18,
-                            )),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: largeSpace,
-                  ),
-                  RichText(
-                    text: TextSpan(
-                      text: " المكافآه :",
-                      style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold),
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: '  $itemReward ، جنيه ',
-                            style: const TextStyle(
-                              color: Colors.black45,
-                              fontSize: 18,
-                            )),
-                      ],
-                    ),
-                  ),
-                ]),
               ),
-            ),
+              onPressed: () {
+                // do something
+              },
+            )
           ],
+          centerTitle: true,
+          title: const Text("لقيت دوت كوم"),
+          backgroundColor: Color.fromARGB(255, 32, 151, 84),
+        ),
+        body: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: D.sizeXXLarge),
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 10.0, // soften the shadow
+                        spreadRadius: 0.1, //extend the shadow
+                        offset: Offset(
+                          0.1, // Move to right 5  horizontally
+                          0.1, // Move to bottom 5 Vertically
+                        ),
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.white,
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.820,
+                  width: 400,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: Center(
+                      child: Column(
+                        children: [
+                          const Text(
+                            "الخدمات",
+                            style: TextStyle(
+                                fontSize: 28,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            height: D.size3XLarge,
+                          ),
+                          const SizedBox(
+                            height: D.size3XLarge,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    Navigator.pushNamed(context, "/result");
+                                  });
+                                },
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.15,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.40,
+                                  decoration: BoxDecoration(
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          color: Colors.grey,
+                                          blurRadius: 10.0, // soften the shadow
+                                          spreadRadius: 0.1, //extend the shadow
+                                          offset: Offset(
+                                            0.1, // Move to right 5  horizontally
+                                            0.1, // Move to bottom 5 Vertically
+                                          ),
+                                        )
+                                      ],
+                                      borderRadius: BorderRadius.circular(
+                                        12,
+                                      ),
+                                      color: Colors.white),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center, //x
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.center, //y
+                                    children: const [
+                                      Icon(
+                                        FontAwesomeIcons.phone,
+                                        size: 40,
+                                        color: Colors.green,
+                                      ),
+                                      SizedBox(
+                                        height: D.sizeLarge,
+                                      ),
+                                      Text(
+                                        "أرقام تهمك",
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.black54,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: D.sizeXXLarge,
+                              ),
+                              Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.15,
+                                width: MediaQuery.of(context).size.width * 0.40,
+                                decoration: BoxDecoration(
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        blurRadius: 10.0, // soften the shadow
+                                        spreadRadius: 1.0, //extend the shadow
+                                      )
+                                    ],
+                                    borderRadius: BorderRadius.circular(
+                                      12,
+                                    ),
+                                    color: Colors.white),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, "/goldPrices");
+                                        setState(() {});
+                                      },
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center, //x
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center, //y
+                                        children: const [
+                                          Icon(
+                                            FontAwesomeIcons.coins,
+
+                                            size: 40,
+                                            color: Colors.orangeAccent,
+
+                                            /// salama edit color
+                                          ),
+                                          SizedBox(height: D.sizeLarge),
+                                          Text("أسعار الذهب و الدولار",
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.black54,
+                                                fontWeight: FontWeight.bold,
+                                              )),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
-///مكان الفقد"

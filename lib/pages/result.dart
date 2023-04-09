@@ -1,143 +1,322 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../dimensions.dart';
 
-import 'dart:math';
+class Result extends StatefulWidget {
+  const Result({Key? key}) : super(key: key);
 
-class SecondPage extends StatefulWidget {
   @override
-  State<SecondPage> createState() => _SecondPageState();
+  State<Result> createState() => _ResultState();
 }
 
-class _SecondPageState extends State<SecondPage> {
-  String checkResult(double input) {
-    if (input > 25) {
-      return "over Weight";
-    } else if (input < 25) {
-      return "Normal";
-    } else {
-      return "Not Normal at all";
-    }
-    return "";
-  }
-
-  String explanation(double input) {
-    if (input > 25) {
-      return "g";
-    } else if (input < 25) {
-      return "o";
-    } else {
-      return "s";
-    }
-  }
-
+class _ResultState extends State<Result> {
   @override
   Widget build(BuildContext context) {
-    final result = ModalRoute.of(context)?.settings.arguments as double;
-
-    /// استقبال ال result من الصفحه السابقه
-
-    ///
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(0),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 40),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "YOUR RESULT",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 27,
-                ),
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.6,
-                  width: MediaQuery.of(context).size.width * 0.80,
-                  decoration: BoxDecoration(
-                    borderRadius: (BorderRadius.circular(10)),
-                    color: Color.fromRGBO(30, 30, 40, 1),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(27),
-                        child: Text(
-                          checkResult(result),
-                          style: TextStyle(
-                              fontSize: 33, color: Colors.greenAccent),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 100,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "${result.toStringAsFixed(2)}",
-                            style: TextStyle(fontSize: 33, color: Colors.white),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 120,
-                      ),
-                      Text(
-                        explanation(result),
-                        style: TextStyle(fontSize: 33, color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    double calculateBMI(
-                        {required double weight, required double height}) {
-// BMI = weight(kg) / height(m)^2
-                      final result = weight / pow(height, 2);
-                      return result;
-                    }
-
-                    setState(() {});
-                  },
-                  style: ElevatedButton.styleFrom(
-                    elevation: 5,
-                    backgroundColor: Colors.red,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(8))),
-                    minimumSize: const Size(350, 60),
-                  ),
-                  child: const Text("RE-CALCULATE YOUR BMI",
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold)),
-                ),
-              ],
-            ),
+        appBar: AppBar(
+          titleSpacing: 0.0,
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: const Icon(Icons.home_repair_service),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+              );
+            },
           ),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(
+                Icons.menu,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                // do something
+              },
+            )
+          ],
+          centerTitle: true,
+          title: const Text("لقيت دوت كوم"),
+          backgroundColor: Color.fromARGB(255, 32, 151, 84),
         ),
-      ),
-      drawer: Drawer(),
-      backgroundColor: Color.fromRGBO(10, 0, 40, 30),
-      appBar: AppBar(
-          elevation: 4,
-          shadowColor: Color.fromRGBO(50, 30, 80, 1),
-          backgroundColor: Color.fromRGBO(15, 20, 57, 0),
-          title: (Text(
-            "BMI CALCULATOR",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ))),
-    );
+        body: Center(
+            child: Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.white,
+                ),
+                height: MediaQuery.of(context).size.height * 0.820,
+                width: 400,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: D.size3XLarge),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const Center(
+                          child: Text(
+                            "أرقام تهمك",
+                            style: TextStyle(
+                                fontSize: 28,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: D.size3XLarge,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(right: D.size3XLarge),
+                          child: Text(
+                            "أرقام الطواري",
+                            style: TextStyle(
+                                fontSize: 24,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: D.sizeXXLarge,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: D.sizeXXLarge),
+                          child: InkWell(
+                              onTap: () {},
+                              child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    const Text(
+                                      "الإسعاف",
+                                      style: TextStyle(
+                                        fontSize: 24,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: D.sizeLarge,
+                                    ),
+                                    Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: const ShapeDecoration(
+                                          shape:
+                                              CircleBorder(), //here we set the circular figure
+                                          color: Colors.red),
+                                      child: const Center(
+                                          child: Icon(
+                                        FontAwesomeIcons.ambulance,
+                                        size: 20,
+                                        color: Colors.white,
+                                      )),
+                                    ),
+                                  ])),
+                        ),
+                        const SizedBox(
+                          height: D.sizeXXLarge,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: D.sizeXXLarge),
+                          child: InkWell(
+                              onTap: () {},
+                              child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    const Text(
+                                      "المطافي",
+                                      style: TextStyle(
+                                        fontSize: 24,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: D.sizeLarge,
+                                    ),
+                                    Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: const ShapeDecoration(
+                                          shape:
+                                              CircleBorder(), //here we set the circular figure
+                                          color: Colors.red),
+                                      child: const Center(
+                                          child: Icon(
+                                        Icons.fire_extinguisher_rounded,
+                                        size: 20,
+                                        color: Colors.white,
+                                      )),
+                                    ),
+                                  ])),
+                        ),
+                        const SizedBox(
+                          height: D.sizeXXLarge,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: D.sizeXXLarge),
+                          child: InkWell(
+                              onTap: () {},
+                              child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    const Text(
+                                      "شرطه ",
+                                      style: TextStyle(
+                                        fontSize: 24,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: D.sizeLarge,
+                                    ),
+                                    Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: const ShapeDecoration(
+                                          shape:
+                                              CircleBorder(), //here we set the circular figure
+                                          color: Colors.red),
+                                      child: const Center(
+                                          child: Icon(
+                                        Icons.local_police,
+                                        size: 20,
+                                        color: Colors.white,
+                                      )),
+                                    ),
+                                  ])),
+                        ),
+                        const SizedBox(
+                          height: D.size3XLarge,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(right: D.size3XLarge),
+                          child: Text(
+                            "معامل التحاليل",
+                            style: TextStyle(
+                                fontSize: 24,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: D.sizeXXLarge,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: D.sizeXXLarge),
+                          child: InkWell(
+                              onTap: () {},
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  const Text(
+                                    "معمل البرج",
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: D.sizeLarge,
+                                  ),
+                                  Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: const ShapeDecoration(
+                                        shape:
+                                            CircleBorder(), //here we set the circular figure
+                                        color: Colors.greenAccent),
+                                    child: const Center(
+                                        child: Icon(
+                                      FontAwesomeIcons.microscope,
+                                      size: 20,
+                                      color: Colors.white,
+                                    )),
+                                  ),
+                                ],
+                              )),
+                        ),
+                        const SizedBox(
+                          height: D.sizeXXLarge,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: D.sizeXXLarge),
+                          child: InkWell(
+                              onTap: () {},
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  const Text(
+                                    "معمل المختبر",
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: D.sizeLarge,
+                                  ),
+                                  Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: const ShapeDecoration(
+                                        shape:
+                                            CircleBorder(), //here we set the circular figure
+                                        color: Colors.greenAccent),
+                                    child: const Center(
+                                        child: Icon(
+                                      FontAwesomeIcons.microscope,
+                                      size: 20,
+                                      color: Colors.white,
+                                    )),
+                                  ),
+                                ],
+                              )),
+                        ),
+                        const SizedBox(
+                          height: D.sizeXXLarge,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: D.sizeXXLarge),
+                          child: InkWell(
+                              onTap: () {},
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  const Text(
+                                    "معمل الشمس",
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: D.sizeLarge,
+                                  ),
+                                  Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: const ShapeDecoration(
+                                        shape:
+                                            CircleBorder(), //here we set the circular figure
+                                        color: Colors.greenAccent),
+                                    child: const Center(
+                                        child: Icon(
+                                      FontAwesomeIcons.microscope,
+                                      size: 20,
+                                      color: Colors.white,
+                                    )),
+                                  ),
+                                ],
+                              )),
+                        ),
+                      ]),
+                ))));
   }
 }
